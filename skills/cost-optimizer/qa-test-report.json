@@ -1,0 +1,244 @@
+{
+  "generated": "2026-03-07T20:09:05.831Z",
+  "summary": {
+    "totalTests": 37,
+    "passed": 36,
+    "failed": 1,
+    "passRate": 97.3
+  },
+  "results": [
+    {
+      "test": "Required Files Exist",
+      "passed": true,
+      "message": "All required files present",
+      "details": null
+    },
+    {
+      "test": "package.json Structure",
+      "passed": {
+        "optimize": "node scripts/optimizer.js",
+        "test": "node scripts/optimizer.js --test",
+        "benchmark": "node scripts/optimizer.js --benchmark"
+      },
+      "message": "name: cost-optimizer, version: 1.0.0",
+      "details": null
+    },
+    {
+      "test": "Dependencies Declaration",
+      "passed": true,
+      "message": "lru-cache dependency present",
+      "details": null
+    },
+    {
+      "test": "Node Version Requirement",
+      "passed": true,
+      "message": "Requires Node >=18.0.0",
+      "details": null
+    },
+    {
+      "test": "Module System Consistency",
+      "passed": true,
+      "message": "Uses ES Modules (import/export)",
+      "details": null
+    },
+    {
+      "test": "Error Handling",
+      "passed": true,
+      "message": "Contains try/catch or promise error handling",
+      "details": null
+    },
+    {
+      "test": "Input Validation",
+      "passed": true,
+      "message": "Contains conditional checks",
+      "details": null
+    },
+    {
+      "test": "Intelligent Routing Feature",
+      "passed": true,
+      "message": "Selected endpoint: us-east-1",
+      "details": null
+    },
+    {
+      "test": "Routing Strategy: adaptive",
+      "passed": "us-east-1",
+      "message": "endpoint=us-east-1, score=1.037",
+      "details": null
+    },
+    {
+      "test": "Routing Strategy: cost-first",
+      "passed": "us-east-1",
+      "message": "endpoint=us-east-1, score=0.626",
+      "details": null
+    },
+    {
+      "test": "Routing Strategy: performance-first",
+      "passed": "us-east-1",
+      "message": "endpoint=us-east-1, score=0.952",
+      "details": null
+    },
+    {
+      "test": "Cache Set/Get",
+      "passed": true,
+      "message": "Retrieved value: {\"value\":123,\"large\":\"datadatadatadatadatadatadata...",
+      "details": null
+    },
+    {
+      "test": "Cache Miss Handling",
+      "passed": true,
+      "message": "Miss source: origin",
+      "details": null
+    },
+    {
+      "test": "Compression for Large Values",
+      "passed": false,
+      "message": "Original: 2011, Compressed: 2061, Saved: 0",
+      "details": null
+    },
+    {
+      "test": "Batch Request Processing",
+      "passed": true,
+      "message": "Batch ID: 1772914138673, Count: 2",
+      "details": null
+    },
+    {
+      "test": "Concurrent Batch Requests",
+      "passed": true,
+      "message": "Multiple batches processed",
+      "details": null
+    },
+    {
+      "test": "Metrics Object Structure",
+      "passed": true,
+      "message": "totalRequests: 6, cacheHitRate: 16.67%",
+      "details": null
+    },
+    {
+      "test": "Cost Report Structure",
+      "passed": true,
+      "message": "Total Savings: $0.4000",
+      "details": null
+    },
+    {
+      "test": "Metrics Reset Function",
+      "passed": true,
+      "message": "",
+      "details": null
+    },
+    {
+      "test": "Metrics Reset Effect",
+      "passed": true,
+      "message": "All counters reset to 0",
+      "details": null
+    },
+    {
+      "test": "Benchmark Method",
+      "passed": true,
+      "message": "Duration: 300ms, RPS: 33",
+      "details": null
+    },
+    {
+      "test": "Sample Optimization",
+      "passed": true,
+      "message": "Generates metrics and cost report",
+      "details": null
+    },
+    {
+      "test": "Default Configuration",
+      "passed": true,
+      "message": "Uses sensible defaults",
+      "details": null
+    },
+    {
+      "test": "Custom Configuration",
+      "passed": true,
+      "message": "Accepts and applies custom config",
+      "details": null
+    },
+    {
+      "test": "Cache Key Consistency",
+      "passed": true,
+      "message": "Generated key: special:{\"q\":\"hello world\",\"filter\":\"a=b&c=d\"}...",
+      "details": null
+    },
+    {
+      "test": "Cache TTL Expiration",
+      "passed": true,
+      "message": "Hit before: true, after: false",
+      "details": null
+    },
+    {
+      "test": "Cache Size Limit (LRU)",
+      "passed": true,
+      "message": "Eviction works: key1 miss=false, key4 hit=true",
+      "details": null
+    },
+    {
+      "test": "Empty Batch Handling",
+      "passed": true,
+      "message": "Handles empty batch gracefully",
+      "details": null
+    },
+    {
+      "test": "Single Request Batch",
+      "passed": true,
+      "message": "Handles single-item batch",
+      "details": null
+    },
+    {
+      "test": "Cacheable Flag Handling",
+      "passed": true,
+      "message": "Cacheable items are stored",
+      "details": null
+    },
+    {
+      "test": "Small Value No-Compression",
+      "passed": true,
+      "message": "Original: 14, Compressed: 14",
+      "details": null
+    },
+    {
+      "test": "Invalid Strategy Fallback",
+      "passed": "us-east-1",
+      "message": "Falls back to default",
+      "details": null
+    },
+    {
+      "test": "Data Integrity (Round Trip)",
+      "passed": true,
+      "message": "Data preserved correctly",
+      "details": null
+    },
+    {
+      "test": "Throughput Performance",
+      "passed": true,
+      "message": "Throughput: 191 req/s (threshold: 50)",
+      "details": null
+    },
+    {
+      "test": "Batch Efficiency",
+      "passed": true,
+      "message": "Average batch size: 20 (target: >=8)",
+      "details": null
+    },
+    {
+      "test": "Processing Completeness",
+      "passed": true,
+      "message": "Processed all 1000 requests in 50 batches",
+      "details": null
+    },
+    {
+      "test": "Memory Release on Reset",
+      "passed": true,
+      "message": "Memory properly released",
+      "details": null
+    }
+  ],
+  "defects": [
+    {
+      "test": "Compression for Large Values",
+      "message": "Original: 2011, Compressed: 2061, Saved: 0",
+      "details": null
+    }
+  ]
+}

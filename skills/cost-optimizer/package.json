@@ -1,0 +1,27 @@
+{
+  "name": "cost-optimizer",
+  "version": "1.0.0",
+  "description": "Intelligent cost optimization with routing, caching, compression, and performance monitoring",
+  "main": "scripts/optimizer.js",
+  "type": "module",
+  "scripts": {
+    "optimize": "node scripts/optimizer.js",
+    "test": "node scripts/optimizer.js --test",
+    "benchmark": "node scripts/optimizer.js --benchmark"
+  },
+  "keywords": [
+    "cost-optimization",
+    "caching",
+    "compression",
+    "monitoring",
+    "routing"
+  ],
+  "author": "OpenClaw",
+  "license": "MIT",
+  "dependencies": {
+    "lru-cache": "^10.0.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
