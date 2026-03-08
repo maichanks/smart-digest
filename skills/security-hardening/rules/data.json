@@ -1,0 +1,70 @@
+[
+  {
+    "rule_id": "DATA-001",
+    "severity": "high",
+    "description": "Require try-catch around JSON.parse()",
+    "match": {
+      "type": "regex",
+      "pattern": "JSON\\.parse\\s*\\([^)]+\\)(?!\\s*[. (]|\\s*\\;)",
+      "file_extensions": [
+        ".js",
+        ".mjs",
+        ".ts",
+        ".cjs"
+      ]
+    },
+    "action": "warn",
+    "suggestion": "Wrap JSON.parse() in try-catch; validate data structure"
+  },
+  {
+    "rule_id": "DATA-002",
+    "severity": "high",
+    "description": "Block unsafe deserialization (eval-like)",
+    "match": {
+      "type": "regex",
+      "pattern": "(?:deserialize|unserialize|fromJSON)\\s*\\([^)]*(?:eval|Function)",
+      "file_extensions": [
+        ".js",
+        ".mjs",
+        ".ts",
+        ".cjs"
+      ]
+    },
+    "action": "block",
+    "suggestion": "Use safe parsers; never eval/Function on serialized data"
+  },
+  {
+    "rule_id": "DATA-003",
+    "severity": "critical",
+    "description": "Detect prototype pollution vectors",
+    "match": {
+      "type": "regex",
+      "pattern": "Object.assign\\s*\\([^)]*?(?:__proto__|constructor|prototype)\\b",
+      "file_extensions": [
+        ".js",
+        ".mjs",
+        ".ts",
+        ".cjs"
+      ]
+    },
+    "action": "block",
+    "suggestion": "Never assign to __proto__ or constructor.prototype; use Object.create() or Object.assign() safely"
+  },
+  {
+    "rule_id": "DATA-004",
+    "severity": "medium",
+    "description": "Block unsafe type coercion patterns",
+    "match": {
+      "type": "regex",
+      "pattern": "(?:==|!=)(?=\\s*['\"0-9]|\\s*null|\\s*undefined)",
+      "file_extensions": [
+        ".js",
+        ".mjs",
+        ".ts",
+        ".cjs"
+      ]
+    },
+    "action": "warn",
+    "suggestion": "Use === and !== for strict equality"
+  }
+]

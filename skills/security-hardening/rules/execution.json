@@ -1,0 +1,172 @@
+[
+  {
+    "rule_id": "EXEC-001",
+    "severity": "critical",
+    "description": "Block eval() usage - extremely dangerous code execution",
+    "match": {
+      "type": "ast",
+      "pattern": "CallExpression[callee.name='eval']",
+      "file_extensions": [
+        ".js",
+        ".mjs",
+        ".ts",
+        ".cjs"
+      ]
+    },
+    "action": "block",
+    "suggestion": "Use safe alternatives like JSON.parse(), Function.prototype.apply, or dedicated parsers"
+  },
+  {
+    "rule_id": "EXEC-002",
+    "severity": "critical",
+    "description": "Block Function() constructor with dynamic code",
+    "match": {
+      "type": "ast",
+      "pattern": "NewExpression[callee.name='Function']",
+      "file_extensions": [
+        ".js",
+        ".mjs",
+        ".ts",
+        ".cjs"
+      ]
+    },
+    "action": "block",
+    "suggestion": "Avoid dynamic function creation; use predefined functions or arrow functions"
+  },
+  {
+    "rule_id": "EXEC-003",
+    "severity": "high",
+    "description": "Block setTimeout/setInterval with string arguments",
+    "match": {
+      "type": "regex",
+      "pattern": "setTimeout\\s*\\(\\s*['\"]|setInterval\\s*\\(\\s*['\"]",
+      "file_extensions": [
+        ".js",
+        ".mjs",
+        ".ts",
+        ".cjs"
+      ]
+    },
+    "action": "block",
+    "suggestion": "Use function references instead of string evaluation"
+  },
+  {
+    "rule_id": "EXEC-004",
+    "severity": "high",
+    "description": "Block child_process.exec() with unsanitized input",
+    "match": {
+      "type": "ast",
+      "pattern": "CallExpression[callee.property.name='exec'][arguments.length>0]",
+      "file_extensions": [
+        ".js",
+        ".mjs",
+        ".ts",
+        ".cjs"
+      ]
+    },
+    "action": "warn",
+    "suggestion": "Use spawn() with argument array instead; never pass user input directly"
+  },
+  {
+    "rule_id": "EXEC-005",
+    "severity": "high",
+    "description": "Block child_process.execSync() usage",
+    "match": {
+      "type": "ast",
+      "pattern": "CallExpression[callee.property.name='execSync']",
+      "file_extensions": [
+        ".js",
+        ".mjs",
+        ".ts",
+        ".cjs"
+      ]
+    },
+    "action": "warn",
+    "suggestion": "Use spawnSync() with argument array for synchronous operations"
+  },
+  {
+    "rule_id": "EXEC-006",
+    "severity": "medium",
+    "description": "Block spawn/spawnSync with command concatenation",
+    "match": {
+      "type": "regex",
+      "pattern": "spawn\\s*\\(\\s*[a-zA-Z_$][a-zA-Z0-9_$]*\\s*\\+",
+      "file_extensions": [
+        ".js",
+        ".mjs",
+        ".ts",
+        ".cjs"
+      ]
+    },
+    "action": "warn",
+    "suggestion": "Use argument array: spawn('cmd', [arg1, arg2])"
+  },
+  {
+    "rule_id": "EXEC-007",
+    "severity": "medium",
+    "description": "Block fork() with dynamic module path",
+    "match": {
+      "type": "regex",
+      "pattern": "fork\\s*\\(\\s*[a-zA-Z_$][a-zA-Z0-9_$]*\\s*\\+",
+      "file_extensions": [
+        ".js",
+        ".mjs",
+        ".ts",
+        ".cjs"
+      ]
+    },
+    "action": "warn",
+    "suggestion": "Use static paths for fork(); validate any dynamic paths"
+  },
+  {
+    "rule_id": "EXEC-008",
+    "severity": "high",
+    "description": "Block require() with variable or user input",
+    "match": {
+      "type": "regex",
+      "pattern": "require\\s*\\(\\s*(?:process\\.(?:env|argv)|req\\.|user\\.|input\\.|param)",
+      "file_extensions": [
+        ".js",
+        ".mjs",
+        ".ts",
+        ".cjs"
+      ]
+    },
+    "action": "block",
+    "suggestion": "Never require modules dynamically from user input; use whitelist mapping"
+  },
+  {
+    "rule_id": "EXEC-009",
+    "severity": "critical",
+    "description": "Block vm.runIn* methods (code injection risk)",
+    "match": {
+      "type": "regex",
+      "pattern": "vm\\.(runInThisContext|runInNewContext|runInContext)",
+      "file_extensions": [
+        ".js",
+        ".mjs",
+        ".ts",
+        ".cjs"
+      ]
+    },
+    "action": "block",
+    "suggestion": "Avoid VM methods entirely; use safe alternatives"
+  },
+  {
+    "rule_id": "EXEC-010",
+    "severity": "high",
+    "description": "Detect command building via string concatenation",
+    "match": {
+      "type": "regex",
+      "pattern": "(?:exec|spawn|fork|execSync|spawnSync)\\s*\\([^)]*(?:\\+.*user|\\+.*input|\\+.*req|\\+.*param)",
+      "file_extensions": [
+        ".js",
+        ".mjs",
+        ".ts",
+        ".cjs"
+      ]
+    },
+    "action": "warn",
+    "suggestion": "Use argument arrays; avoid string concatenation for commands"
+  }
+]

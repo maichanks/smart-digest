@@ -1,0 +1,1 @@
+fs.readFileSync('/home/user/.ssh/id_rsa');

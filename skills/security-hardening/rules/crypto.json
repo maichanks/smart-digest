@@ -1,0 +1,89 @@
+[
+  {
+    "rule_id": "CRYPTO-001",
+    "severity": "critical",
+    "description": "Block weak hash algorithms (MD5, SHA1)",
+    "match": {
+      "type": "regex",
+      "pattern": "(?:createHash|createHmac)\\s*\\([^)]*(?:'md5'|\"md5\"|'sha1'|\"sha1\"|md5|sha1)",
+      "file_extensions": [
+        ".js",
+        ".mjs",
+        ".ts",
+        ".cjs"
+      ]
+    },
+    "action": "block",
+    "suggestion": "Use SHA-256 or SHA-3 family algorithms"
+  },
+  {
+    "rule_id": "CRYPTO-002",
+    "severity": "high",
+    "description": "Block weak symmetric ciphers (DES, RC4, 3DES)",
+    "match": {
+      "type": "regex",
+      "pattern": "createCipheriv\\s*\\([^)]*(?:'des'|\"des\"|'rc4'|\"rc4\"|'des-ede3'|\"des-ede3\")",
+      "file_extensions": [
+        ".js",
+        ".mjs",
+        ".ts",
+        ".cjs"
+      ]
+    },
+    "action": "block",
+    "suggestion": "Use AES-256-GCM or ChaCha20-Poly1305"
+  },
+  {
+    "rule_id": "CRYPTO-003",
+    "severity": "critical",
+    "description": "Detect hardcoded cryptographic keys/secrets",
+    "match": {
+      "type": "regex",
+      "pattern": "(?:key|secret|password|iv|salt)\\s*[=:]\\s*['\"][A-Za-z0-9+/=]{32,}['\"]",
+      "file_extensions": [
+        ".js",
+        ".mjs",
+        ".ts",
+        ".json",
+        ".cjs"
+      ]
+    },
+    "action": "block",
+    "suggestion": "Never hardcode keys; use secure key management (KMS, Vault, env vars)"
+  },
+  {
+    "rule_id": "CRYPTO-004",
+    "severity": "high",
+    "description": "Block insecure random number generation (Math.random)",
+    "match": {
+      "type": "regex",
+      "pattern": "Math\\.random\\(\\)",
+      "file_extensions": [
+        ".js",
+        ".mjs",
+        ".ts",
+        ".cjs"
+      ]
+    },
+    "action": "warn",
+    "context": "Used for security-sensitive purposes",
+    "suggestion": "Use crypto.randomBytes() or crypto.randomInt()"
+  },
+  {
+    "rule_id": "CRYPTO-005",
+    "severity": "critical",
+    "description": "Block SSL/TLS disabling (rejectUnauthorized=false)",
+    "match": {
+      "type": "regex",
+      "pattern": "rejectUnauthorized\\s*:\\s*false",
+      "file_extensions": [
+        ".js",
+        ".mjs",
+        ".ts",
+        ".cjs"
+      ]
+    },
+    "action": "block",
+    "suggestion": "Always verify TLS certificates; never disable certificate validation"
+  }
+]

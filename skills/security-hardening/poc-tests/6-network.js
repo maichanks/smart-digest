@@ -1,0 +1,1 @@
+http.request({hostname: '169.254.169.254'});

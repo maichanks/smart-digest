@@ -1,0 +1,178 @@
+[
+  {
+    "rule_id": "FS-001",
+    "severity": "critical",
+    "description": "Block path traversal patterns (../, ..\\\\)",
+    "match": {
+      "type": "regex",
+      "pattern": "(?:\\.\\./|\\.\\.\\\\)",
+      "file_extensions": [
+        ".js",
+        ".mjs",
+        ".ts",
+        ".json",
+        ".cjs"
+      ]
+    },
+    "action": "block",
+    "suggestion": "Use path.resolve() and whitelist valid paths"
+  },
+  {
+    "rule_id": "FS-002",
+    "severity": "high",
+    "description": "Restrict access to /etc/ and system configuration",
+    "match": {
+      "type": "regex",
+      "pattern": "['\"]\\/(?:etc|usr\\/etc|system32|windows)\\/",
+      "file_extensions": [
+        ".js",
+        ".mjs",
+        ".ts",
+        ".cjs"
+      ]
+    },
+    "action": "warn",
+    "suggestion": "Avoid direct access to system directories"
+  },
+  {
+    "rule_id": "FS-003",
+    "severity": "critical",
+    "description": "Prevent reading sensitive private keys",
+    "match": {
+      "type": "regex",
+      "pattern": "(?:\\/keys\\/|\\/secrets\\/|\\/.ssh\\/|\\/pem.d\\/|\\/etc\\/ssl\\/|\\/private\\/|\\.(?:env|pem|key|rsa|ppk|id_|credentials|secret))",
+      "file_extensions": [
+        ".js",
+        ".mjs",
+        ".ts",
+        ".cjs"
+      ]
+    },
+    "action": "block",
+    "suggestion": "Never hardcode or directly read private keys; use secure secret management"
+  },
+  {
+    "rule_id": "FS-004",
+    "severity": "high",
+    "description": "Block world-writable file creation (chmod 666/777)",
+    "match": {
+      "type": "regex",
+      "pattern": "chmod\\s*\\(\\s*['\"]?(?:666|777|0o666|0o777)",
+      "file_extensions": [
+        ".js",
+        ".mjs",
+        ".ts",
+        ".cjs"
+      ]
+    },
+    "action": "warn",
+    "suggestion": "Use least privilege: 644 for files, 755 for directories"
+  },
+  {
+    "rule_id": "FS-005",
+    "severity": "high",
+    "description": "Prevent symlink following attacks",
+    "match": {
+      "type": "regex",
+      "pattern": "(?:readlink|fs\\.realpath)\\s*\\(",
+      "file_extensions": [
+        ".js",
+        ".mjs",
+        ".ts",
+        ".cjs"
+      ]
+    },
+    "action": "warn",
+    "suggestion": "Validate paths; use fs.lstat() to detect symlinks before following"
+  },
+  {
+    "rule_id": "FS-006",
+    "severity": "medium",
+    "description": "Restrict chown/chgrp on system files",
+    "match": {
+      "type": "regex",
+      "pattern": "(?:chown|chgrp)\\s*\\([^,]+,\\s*['\"]?\\/(?:etc|usr|var|bin|sbin)",
+      "file_extensions": [
+        ".js",
+        ".mjs",
+        ".ts",
+        ".cjs"
+      ]
+    },
+    "action": "warn",
+    "suggestion": "Avoid changing ownership of system files"
+  },
+  {
+    "rule_id": "FS-007",
+    "severity": "critical",
+    "description": "Block recursive delete without confirmation",
+    "match": {
+      "type": "regex",
+      "pattern": "rm(?:dir)?\\(.*['\"]\\/.*['\"]\\s*,\\s*['\"]-?r['\"]",
+      "file_extensions": [
+        ".js",
+        ".mjs",
+        ".ts",
+        ".sh",
+        ".bash",
+        ".cjs"
+      ]
+    },
+    "action": "block",
+    "suggestion": "Use explicit whitelist; never delete recursively without safeguards"
+  },
+  {
+    "rule_id": "FS-008",
+    "severity": "high",
+    "description": "Prevent access to /proc/ and /sys/",
+    "match": {
+      "type": "regex",
+      "pattern": "['\"]\\/(?:proc|sys)\\/",
+      "file_extensions": [
+        ".js",
+        ".mjs",
+        ".ts",
+        ".cjs"
+      ]
+    },
+    "action": "warn",
+    "suggestion": "Avoid kernel information exposure"
+  },
+  {
+    "rule_id": "FS-009",
+    "severity": "medium",
+    "description": "Detect hardcoded credentials in file paths",
+    "match": {
+      "type": "regex",
+      "pattern": "(?:password|passwd|pwd|secret|api[_-]?key|auth|token)\\s*[=:]\\s*['\"][^'\"]+['\"]",
+      "file_extensions": [
+        ".js",
+        ".mjs",
+        ".ts",
+        ".json",
+        ".yaml",
+        ".yml",
+        ".cjs"
+      ]
+    },
+    "action": "warn",
+    "suggestion": "Move secrets to environment variables or secret manager"
+  },
+  {
+    "rule_id": "FS-010",
+    "severity": "high",
+    "description": "Block absolute path writes outside allowed directories",
+    "match": {
+      "type": "regex",
+      "pattern": "createWriteStream\\s*\\([^,(]*\\/(?!tmp|var|home|app)",
+      "file_extensions": [
+        ".js",
+        ".mjs",
+        ".ts",
+        ".cjs"
+      ]
+    },
+    "action": "block",
+    "suggestion": "Use relative paths or validate absolute paths against whitelist"
+  }
+]

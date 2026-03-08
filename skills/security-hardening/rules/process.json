@@ -1,0 +1,121 @@
+[
+  {
+    "rule_id": "PROC-001",
+    "severity": "critical",
+    "description": "Block process.exit() calls",
+    "match": {
+      "type": "ast",
+      "pattern": "(?:process\\.exit|process\\.kill|process\\.abort)\\(",
+      "file_extensions": [
+        ".js",
+        ".mjs",
+        ".ts",
+        ".cjs"
+      ]
+    },
+    "action": "block",
+    "suggestion": "Use graceful shutdown; throw errors or return instead"
+  },
+  {
+    "rule_id": "PROC-002",
+    "severity": "critical",
+    "description": "Prevent process.kill() on non-child processes",
+    "match": {
+      "type": "regex",
+      "pattern": "process\\.kill\\s*\\([^,]+,\\s*(?!SIG(?:TERM|INT|USR1|USR2|KILL|STOP))",
+      "file_extensions": [
+        ".js",
+        ".mjs",
+        ".ts",
+        ".cjs"
+      ]
+    },
+    "action": "block",
+    "suggestion": "Only kill child processes you created"
+  },
+  {
+    "rule_id": "PROC-003",
+    "severity": "high",
+    "description": "Block process.setuid() / setgid()",
+    "match": {
+      "type": "regex",
+      "pattern": "process\\.set(?:Uid|Gid)\\s*\\(",
+      "file_extensions": [
+        ".js",
+        ".mjs",
+        ".ts",
+        ".cjs"
+      ]
+    },
+    "action": "block",
+    "suggestion": "Privilege dropping should be done at container/OS level"
+  },
+  {
+    "rule_id": "PROC-004",
+    "severity": "high",
+    "description": "Prevent process.chdir() outside allowed paths",
+    "match": {
+      "type": "regex",
+      "pattern": "process\\.chdir\\s*\\([^)]*(?:\\.\\.\\/|\\/etc|\\/root|\\/system)",
+      "file_extensions": [
+        ".js",
+        ".mjs",
+        ".ts",
+        ".cjs"
+      ]
+    },
+    "action": "warn",
+    "suggestion": "Limit directory changes to application directory"
+  },
+  {
+    "rule_id": "PROC-005",
+    "severity": "medium",
+    "description": "Block process.umask() modification",
+    "match": {
+      "type": "regex",
+      "pattern": "process\\.umask\\s*\\(",
+      "file_extensions": [
+        ".js",
+        ".mjs",
+        ".ts",
+        ".cjs"
+      ]
+    },
+    "action": "warn",
+    "suggestion": "Set umask at startup; don't modify dynamically"
+  },
+  {
+    "rule_id": "PROC-006",
+    "severity": "medium",
+    "description": "Detect daemonization attempts",
+    "match": {
+      "type": "regex",
+      "pattern": "(?:daemon|fork\\(\\s*0\\s*\\)|setsid\\s*\\(|detach)",
+      "file_extensions": [
+        ".js",
+        ".mjs",
+        ".ts",
+        ".cjs"
+      ]
+    },
+    "action": "warn",
+    "suggestion": "Process management should be handled by systemd or supervisor"
+  },
+  {
+    "rule_id": "PROC-007",
+    "severity": "low",
+    "description": "Prevent signal handler manipulation",
+    "match": {
+      "type": "regex",
+      "pattern": "process\\.on\\s*\\(\\s*['\"]SIG(?:KILL|STOP|TERM)['\"]",
+      "file_extensions": [
+        ".js",
+        ".mjs",
+        ".ts",
+        ".cjs"
+      ]
+    },
+    "action": "warn",
+    "suggestion": "Signal handlers should be minimal and safe"
+  }
+]

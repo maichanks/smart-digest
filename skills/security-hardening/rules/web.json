@@ -1,0 +1,87 @@
+[
+  {
+    "rule_id": "WEB-001",
+    "severity": "critical",
+    "description": "Block unsanitized user input in HTML (XSS risk)",
+    "match": {
+      "type": "regex",
+      "pattern": "innerHTML\\s*=|outerHTML\\s*=|document\\.write\\s*\\(",
+      "file_extensions": [
+        ".js",
+        ".mjs",
+        ".ts",
+        ".cjs"
+      ]
+    },
+    "action": "block",
+    "suggestion": "Use textContent or sanitize with DOMPurify"
+  },
+  {
+    "rule_id": "WEB-002",
+    "severity": "critical",
+    "description": "Block access to dangerous DOM properties",
+    "match": {
+      "type": "regex",
+      "pattern": "(?:innerHTML|outerHTML|document\\.write)\\s*[=+]\\s*(?:user|input|req|param)",
+      "file_extensions": [
+        ".js",
+        ".mjs",
+        ".ts",
+        ".cjs"
+      ]
+    },
+    "action": "block",
+    "suggestion": "Never assign user input directly to DOM"
+  },
+  {
+    "rule_id": "WEB-003",
+    "severity": "high",
+    "description": "Detect DOM-based XSS patterns",
+    "match": {
+      "type": "regex",
+      "pattern": "(?:location|location\\.href|location\\.replace)\\s*[=]\\s*(?:user|input|req)",
+      "file_extensions": [
+        ".js",
+        ".mjs",
+        ".ts",
+        ".cjs"
+      ]
+    },
+    "action": "warn",
+    "suggestion": "Validate and sanitize any location changes"
+  },
+  {
+    "rule_id": "WEB-004",
+    "severity": "medium",
+    "description": "Block unsafe jQuery methods",
+    "match": {
+      "type": "regex",
+      "pattern": "\\$\\(\\)\\.html\\(|jQuery\\.(?:html|append|prepend|before|after)\\s*\\(",
+      "file_extensions": [
+        ".js",
+        ".mjs",
+        ".ts",
+        ".cjs"
+      ]
+    },
+    "action": "warn",
+    "suggestion": "Use safe jQuery methods: .text(), .attr(), .prop()"
+  },
+  {
+    "rule_id": "WEB-005",
+    "severity": "high",
+    "description": "Prevent eval() in browser context",
+    "match": {
+      "type": "regex",
+      "pattern": "window\\.eval|global\\.eval|setTimeout\\(.*['\"]|setInterval\\(.*['\"]",
+      "file_extensions": [
+        ".js",
+        ".mjs",
+        ".ts",
+        ".cjs"
+      ]
+    },
+    "action": "block",
+    "suggestion": "Never use eval in browser; use safe alternatives"
+  }
+]

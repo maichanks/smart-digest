@@ -1,0 +1,104 @@
+[
+  {
+    "rule_id": "MOD-001",
+    "severity": "critical",
+    "description": "Block require() with user-controlled input",
+    "match": {
+      "type": "regex",
+      "pattern": "require\\s*\\(\\s*(?:process\\.(?:env|argv)|req|user|input|param)",
+      "file_extensions": [
+        ".js",
+        ".mjs",
+        ".ts",
+        ".cjs"
+      ]
+    },
+    "action": "block",
+    "suggestion": "Use whitelist mapping; never require dynamically from user input"
+  },
+  {
+    "rule_id": "MOD-002",
+    "severity": "high",
+    "description": "Prevent loading modules from untrusted paths",
+    "match": {
+      "type": "regex",
+      "pattern": "require\\s*\\([^)]*(?:\\.\\.\\/|\\/tmp\\/|\\/var\\/tmp)",
+      "file_extensions": [
+        ".js",
+        ".mjs",
+        ".ts",
+        ".cjs"
+      ]
+    },
+    "action": "warn",
+    "suggestion": "Only require from known safe directories"
+  },
+  {
+    "rule_id": "MOD-003",
+    "severity": "medium",
+    "description": "Detect npm configuration modifications",
+    "match": {
+      "type": "regex",
+      "pattern": "(?:npm\\.set|npm\\.config\\.set)\\s*\\(",
+      "file_extensions": [
+        ".js",
+        ".mjs",
+        ".ts",
+        ".cjs"
+      ]
+    },
+    "action": "warn",
+    "suggestion": "npm config should be immutable in production"
+  },
+  {
+    "rule_id": "MOD-004",
+    "severity": "critical",
+    "description": "Block module cache manipulation",
+    "match": {
+      "type": "regex",
+      "pattern": "require\\.cache\\s*(?:\\[|delete)",
+      "file_extensions": [
+        ".js",
+        ".mjs",
+        ".ts",
+        ".cjs"
+      ]
+    },
+    "action": "block",
+    "suggestion": "Module cache should not be manipulated; clear require cache is dangerous"
+  },
+  {
+    "rule_id": "MOD-005",
+    "severity": "critical",
+    "description": "Prevent module.constructor access (prototype pollution)",
+    "match": {
+      "type": "regex",
+      "pattern": "module\\.constructor|require\\.('|\")module",
+      "file_extensions": [
+        ".js",
+        ".mjs",
+        ".ts",
+        ".cjs"
+      ]
+    },
+    "action": "block",
+    "suggestion": "Never access module constructor; it enables prototype pollution"
+  },
+  {
+    "rule_id": "MOD-006",
+    "severity": "high",
+    "description": "Detect dynamic require with concatenation/formatting",
+    "match": {
+      "type": "regex",
+      "pattern": "require\\([^)]*(?:\\+|template strings|sprintf|format)\\s*\\(",
+      "file_extensions": [
+        ".js",
+        ".mjs",
+        ".ts",
+        ".cjs"
+      ]
+    },
+    "action": "warn",
+    "suggestion": "Use static require paths; map dynamic names to whitelist"
+  }
+]

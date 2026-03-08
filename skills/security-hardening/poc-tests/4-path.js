@@ -1,0 +1,1 @@
+fs.readFile('../../../etc/passwd', 'utf-8');
