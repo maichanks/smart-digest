@@ -1,0 +1,27 @@
+# Dependencies
+node_modules/
+
+# Logs
+logs/
+*.log
+/tmp/smart-digest*.log
+
+# State
+state.json
+
+# Config with secrets (use config.yaml.example as template)
+config.yaml
+config.local.yaml
+.env
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+
+# Backup files
+*.bak
+*.zip

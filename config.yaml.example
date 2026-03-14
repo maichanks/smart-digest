@@ -1,0 +1,48 @@
+smartDigest:
+  # Enable/disable the skill
+  enabled: true
+  # Schedule (cron expression) - optional, can be triggered manually
+  schedule: "0 9 * * *"  # Daily at 9 AM
+  # Output channel (openclaw message channel)
+  channel: "feishu"
+  # Target user or chat ID (required for message send)
+  # For Feishu: user's open_id (e.g., "ou_xxxxxxxx") or chat_id
+  # For Telegram: chat ID or username
+  target: "ou_xxxxxxxx"  # Set to your chat ID (open_id for Feishu)
+  
+  # RSS sources to fetch (optional, disabled if no network)
+  rssSources:
+    - url: "https://rsshub.app/hackernews"
+      name: "Hacker News"
+    - url: "https://rsshub.app/techcrunch"
+      name: "TechCrunch"
+    - url: "https://rsshub.app/theverge"
+      name: "The Verge"
+  
+  # SearXNG search sources (fallback when RSS unavailable)
+  searchSources:
+    enabled: true
+    searxngUrl: "http://localhost:8080"
+    queries:
+      - "latest news"
+      - "tech news"
+      - "artificial intelligence"
+    maxResults: 10
+    categories: "general"
+    language: "zh-CN"
+  
+  # Email/Newsletter configuration (optional, future)
+  email:
+    enabled: false
+    imapHost: "imap.gmail.com"
+    imapPort: 993
+    imapUser: ""
+    imapPass: ""
+    fromWhitelist: []
+  
+  # LLM configuration (for summarization)
+  llm:
+    provider: "openrouter"
+    openrouterApiKey: ""  # Set via environment or here
+    model: "anthropic/claude-3-haiku"
+    maxTokens: 150

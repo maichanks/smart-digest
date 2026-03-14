@@ -1,0 +1,16 @@
+[
+  {
+    "title": "国际油价最新动态：OPEC+考虑进一步减产",
+    "link": "https://example.com/oil-news-1",
+    "content": "据路透社报道，OPEC+成员国正在讨论是否实施额外的石油减产措施，以稳定全球油价。",
+    "source": "Backup",
+    "query": "石油"
+  },
+  {
+    "title": "中国原油进口量回升，能源需求复苏",
+    "link": "https://example.com/oil-news-2",
+    "content": "2026年2月份中国原油进口量同比增长5%，显示能源需求正在恢复。",
+    "source": "Backup",
+    "query": "石油"
+  }
+]

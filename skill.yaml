@@ -1,0 +1,21 @@
+name: smart-digest
+version: 1.0.0
+description: Smart RSS + Newsletter Digest skill
+main: smart-digest.js
+config:
+  - config.yaml.example
+  - config.yaml
+environment:
+  - OPENROUTER_API_KEY
+  - CONFIG_PATH
+permissions:
+  - message:send
+  - config:read
+  - cache:read
+  - cache:write
+  - log:write
+dependencies:
+  - rss-parser
+  - nodemailer
+  - axios
+  - yaml
