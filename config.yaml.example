@@ -10,6 +10,13 @@ smartDigest:
   # For Telegram: chat ID or username
   target: "ou_xxxxxxxx"  # Set to your chat ID (open_id for Feishu)
   
+  # Your interests (used to generate search queries)
+  # Edit these to match topics you want to follow
+  userInterests:
+    - "石油"
+    - "oil news"
+    - "energy"
+  
   # RSS sources to fetch (optional, disabled if no network)
   rssSources:
     - url: "https://rsshub.app/hackernews"
