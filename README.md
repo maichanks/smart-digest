@@ -4,7 +4,11 @@
 [![OpenClaw](https://img.shields.io/badge/OpenClaw-Skill-ff6b6b)](https://github.com/openclaw/openclaw)
 [![Node.js](https://img.shields.io/badge/node-%3E%3D18-brightgreen)](https://nodejs.org)
 
-> AI-powered news digest for OpenClaw — aggregate, summarize, deliver.
+> ⚡ **一键部署**：`curl -fsSL https://raw.githubusercontent.com/maichanks/smart-digest/main/deploy.js -o deploy.js && node deploy.js`
+>
+> AI 驱动的 OpenClaw 智能资讯摘要技能，自动聚合 RSS + SearXNG 搜索，使用 OpenRouter 生成中文摘要，每日定时推送至飞书/Telegram。3 分钟完成部署，立即终结信息过载。
+
+**🚀 3 分钟部署** | 📖 双语文档 | 🆓 MIT 协议 | ⭐ 专为 OpenClaw 生态设计
 
 ---
 
@@ -55,11 +59,24 @@ Smart Digest is an OpenClaw skill that automatically fetches news from multiple 
 └─────────────┘
 ```
 
+### 🚀 One-Click Deploy
+
+Run the automated deployment script (requires Node.js):
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/maichanks/smart-digest/main/deploy.js -o deploy.js && node deploy.js
+```
+
+Or manually copy the repository to `$HOME/.openclaw/workspace/skills/` and run `npm install`.
+
+---
+
+
 ### 📦 Installation
 
 1. **Clone or copy** to your OpenClaw skills directory:
    ```bash
-   cp -r smart-digest /home/admin/.openclaw/workspace/skills/
+   cp -r smart-digest $HOME/.openclaw/workspace/skills/
    ```
 
 2. **Install dependencies**:
@@ -220,7 +237,7 @@ Smart Digest 是一个 OpenClaw skill，自动从多源聚合新闻，使用 AI 
 
 1. **复制到 OpenClaw skills 目录**：
    ```bash
-   cp -r smart-digest /home/admin/.openclaw/workspace/skills/
+   cp -r smart-digest $HOME/.openclaw/workspace/skills/
    ```
 
 2. **安装依赖**：
@@ -349,3 +366,24 @@ openclaw cron add --name "SmartDigest" --cron "0 21 * * *" --session isolated --
 ```
 
 Enjoy your personalized news digest! 享受个性化每日资讯！
+
+---
+
+## 📝 Keywords
+
+`openclaw`, `smart-digest`, `news-digest`, `rss`, `searxng`, `ai-summarization`, `chinese-summarization`, `openrouter`, `information-overload`, `automation`, `feishu`, `telegram`, `news-aggregation`
+
+---
+
+## 🔗 Related OpenClaw Projects
+
+- [OpenClaw GitHub Trending Notifier](https://github.com/maichanks/openclaw-github-trending) - Monitor GitHub trending and send summaries
+- [Security Hardening for OpenClaw](https://github.com/maichanks/security-hardening) - Comprehensive security toolkit
+- [LLM Cost Optimizer](https://github.com/maichanks/llm-cost-optimizer) - Monitor and reduce LLM API costs
+- [Multi-Platform Publisher](https://github.com/maichanks/multi-platform-publisher) - Enterprise content publishing with MCP support
+
+---
+
+## 📄 License
+
+MIT © 2026 maichanks <hankan1993@gmail.com>
